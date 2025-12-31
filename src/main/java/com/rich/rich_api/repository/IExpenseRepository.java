@@ -12,7 +12,8 @@ import com.rich.rich_api.model.Expense;
 public interface IExpenseRepository extends JpaRepository<Expense, Long> 
 {
     @Query(value = "SELECT id, category, description, amount, local_created_date,"
-                    + " COUNT(id) OVER() AS total_records"
+                    + " COUNT(id) OVER() AS total_records,"
+                    + " SUM(amount) OVER() AS total_amount"
                     + " FROM expense WHERE local_created_date BETWEEN"
                     + " :startDate AND :endDate  ORDER BY local_created_date DESC"
                     + " LIMIT :pageSize OFFSET :offset", nativeQuery = true)

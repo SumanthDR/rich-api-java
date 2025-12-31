@@ -20,7 +20,7 @@ public class ExpenseServices
 
     public Expense saveExpense(SaveExpenseRequestDto expenseDto)
     {
-        Expense expense = null;
+        Expense expense = new Expense();
         try
         {
             expense.setCategory(expenseDto.getCategory());
@@ -61,6 +61,8 @@ public class ExpenseServices
                     expenseRow.setAmount(((Double)row[3]));
                     expenseRow.setLocalCreatedDate(row[4].toString());
                     expenseRow.setTotalRecords(((Number)row[5]).intValue());
+                    expenseRow.setTotalAmount((Double)row[6]);
+                    
                     return expenseRow;
                 }
             ).toList();

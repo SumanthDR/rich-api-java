@@ -15,7 +15,7 @@ public class SaveExpenseRequestDto
     {
         return category;
     }
-    
+
     public void setCategory(Category category) 
     {
         this.category = category;
@@ -43,7 +43,7 @@ public class SaveExpenseRequestDto
 
     public LocalDate getLocalCreatedDate()
     {
-        return LocalDate.now();
+        return localCreatedDate;
     }
     
     public void setLocalCreatedDate(LocalDate createdLocalDate) 
