@@ -2,7 +2,6 @@ package com.rich.rich_api.services;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rich.rich_api.dto.PaginationViewRequestDto;
@@ -15,8 +14,11 @@ import com.rich.rich_api.repository.IExpenseRepository;
 @Service
 public class ExpenseServices
 {
-    @Autowired
-    private IExpenseRepository expenseRepository;
+    private final IExpenseRepository _expenseRepository;
+
+    public ExpenseServices(IExpenseRepository expenseRepository) {
+        this._expenseRepository = expenseRepository;
+    }
 
     public Expense saveExpense(SaveExpenseRequestDto expenseDto)
     {
@@ -28,7 +30,7 @@ public class ExpenseServices
             expense.setAmount(expenseDto.getAmount());
             expense.setLocalCreatedDate(expenseDto.getLocalCreatedDate());
 
-            expenseRepository.save(expense);
+            _expenseRepository.save(expense);
         }
         catch(Exception ex)
         {
@@ -45,7 +47,7 @@ public class ExpenseServices
         List<ViewExpenseListResponseDto> expenseList = null;
         try
         {
-                List<Object[]> expenseData = expenseRepository.findExpensesWithPagination(
+                List<Object[]> expenseData = _expenseRepository.findExpensesWithPagination(
                 paginationViewRequestDto.getStartDate(),
                 paginationViewRequestDto.getEndDate(),
                 paginationViewRequestDto.getPageSize(),
