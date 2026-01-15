@@ -2,7 +2,6 @@ package com.rich.rich_api.model;
 
 import java.time.LocalDate;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -13,7 +12,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
 
 @Data
 @NoArgsConstructor
@@ -32,5 +30,12 @@ public class Expense
 
     private String description;
     private Double amount;
-    private LocalDate localCreatedDate;   
+    private LocalDate localCreatedDate;
+    
+
+    public void setCategory(Category category) { this.category = category; }
+    public void setDescription(String description) { this.description = description; }
+    public void setAmount(Double amount) { this.amount = amount; }
+    public void setLocalCreatedDate(LocalDate date) { this.localCreatedDate = date; }
+
 }
