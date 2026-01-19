@@ -1,0 +1,33 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:12
+    container_name: rich_postgres
+    environment:
+      POSTGRES_DB: rich_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: tiger
+    ports:
+      - "5434:5432"  # host:container mapping
+    networks:
+      - rich_network
+
+  springboot-app:
+    build: .
+    container_name: rich_springboot
+    depends_on:
+      - postgres
+    ports:
+      - "8080:8080"
+      - "5005:5005"   # debug port
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/rich_db
+      SPRING_DATASOURCE_USERNAME: postgres
+      SPRING_DATASOURCE_PASSWORD: tiger
+    networks:
+      - rich_network
+
+networks:
+  rich_network:
+    driver: bridge

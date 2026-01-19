@@ -2,7 +2,6 @@ package com.rich.rich_api.services;
 
 import java.util.List;
 
-import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.rich.rich_api.dto.PaginationViewRequestDto;
@@ -31,14 +30,16 @@ public class ExpenseServices
             expense.setAmount(expenseDto.getAmount());
             expense.setLocalCreatedDate(expenseDto.getLocalCreatedDate());
 
-            _expenseRepository.save(expense);
+            expense = _expenseRepository.save(expense);
+            
+
+            return expense;
         }
         catch(Exception ex)
         {
             System.out.print(ex);
-        }
-
-        return expense;
+            throw ex;
+        }        
     }
 
     public List<ViewExpenseListResponseDto> getAllExpenses(PaginationViewRequestDto paginationViewRequestDto)
@@ -69,12 +70,14 @@ public class ExpenseServices
                     return expenseRow;
                 }
             ).toList();
+
+            return expenseList;
         }
         catch(Exception ex)
         {
             System.out.print(ex);
-        }
 
-        return expenseList;
+            throw ex;
+        }        
     }
 }
