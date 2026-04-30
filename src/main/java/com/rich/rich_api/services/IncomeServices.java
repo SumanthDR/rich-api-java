@@ -11,8 +11,10 @@ import com.rich.rich_api.dto.ViewIncomeListResponseDto;
 import com.rich.rich_api.model.Income;
 import com.rich.rich_api.repository.IIncomeRepository;
 
+///double file
+
 @Service
-public class IncomeServices 
+public class IncomeServices
 {
     private final IIncomeRepository _incomeRepository;
 
